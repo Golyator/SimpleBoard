@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SimpleBoard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>SimpleBoard</h1>
+      <div id="nickname-form">
+        <input
+          type="text"
+          id="nickname"
+          placeholder="Dein Nickname (optional, max. 20 Zeichen)"
+          maxlength="20"
+        />
+        <button onclick="setNickname()">Loslegen</button>
+      </div>
+      <div id="message-form" style="display: none">
+        <textarea
+          id="message"
+          placeholder="Deine Nachricht (max. 280 Zeichen)"
+          maxlength="280"
+        ></textarea>
+        <button onclick="sendMessage()">Senden</button>
+      </div>
+      <div id="messages"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

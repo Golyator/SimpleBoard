@@ -1,0 +1,6 @@
+CREATE TABLE messages (
+  id SERIAL PRIMARY KEY,
+  nickname VARCHAR(20) NOT NULL,
+  message VARCHAR(280) NOT NULL,
+  timestamp TIMESTAMPTZ DEFAULT NOW()
+);
