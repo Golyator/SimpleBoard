@@ -22,12 +22,12 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/simpleboard:latest -f docker/app.Dockerfile . 
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/simpleboard:latest
-      - name: Deploy to VPS
-        run: |
-          echo "$VPS_SSH_KEY" > key.pem
-          chmod 600 key.pem
-          ssh -o StrictHostKeyChecking=no -i key.pem $VPS_USER@$VPS_IP "
-            cd /opt/simpleboard &&
-            docker-compose pull &&
-            docker-compose up -d
-          "
+      - name: Copy docker-compose.yml to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: $VPS_IP
+          username: $VPS_USER
+          key: $VPS_SSH_KEY
+          port: 22
+          source: "docker-compose.yml"
+          target: "$APP_DIR/"
