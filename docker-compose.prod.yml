@@ -17,7 +17,6 @@ services:
       - POSTGRES_DB=simpleboard
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # test ob Änderung übertragen wird
     networks:
       - app-network
 

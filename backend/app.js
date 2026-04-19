@@ -3,11 +3,11 @@ const cors = require("cors");
 const session = require("express-session");
 const { Pool } = require("pg");
 const helmet = require("helmet");
-const waitPort = require("wait-port"); // Neu
+const waitPort = require("wait-port");
 
 const app = express();
 
-// Warte auf die Datenbank, bevor der Server startet
+// Warte auf die Datenbank und starte den Server
 async function startServer() {
   try {
     // Warte, bis Port 5432 der Datenbank erreichbar ist
@@ -24,6 +24,17 @@ async function startServer() {
     // Teste die Verbindung
     await pool.query("SELECT 1");
     console.log("Datenbankverbindung erfolgreich!");
+
+    // Erstelle die Tabelle "messages", falls sie nicht existiert
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS messages (
+        id SERIAL PRIMARY KEY,
+        nickname VARCHAR(20) NOT NULL,
+        message TEXT NOT NULL,
+        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    console.log("Datenbanktabelle 'messages' ist bereit!");
 
     // Middleware und Routen hier ...
     app.use(cors({ origin: "http://localhost", credentials: true }));
