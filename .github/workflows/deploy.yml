@@ -53,5 +53,8 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
-          source: "frontend/*"
+          source: |
+            frontend/index.html
+            frontend/style.css
+            frontend/script.js
           target: "/usr/share/nginx/html/"
