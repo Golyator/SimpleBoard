@@ -3,6 +3,12 @@ name: Deploy SimpleBoard
 on:
   push:
     branches: [main]
+    paths-ignore: # Ignoriere Änderungen, die das Image nicht beeinflussen
+      - "**.md"
+      - ".github/**"
+      - "frontend/**"
+      - "docker/nginx.conf"
+      - "README.md"
 
 env:
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
