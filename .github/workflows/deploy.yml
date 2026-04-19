@@ -35,7 +35,6 @@ jobs:
           target: /home/${{ secrets.VPS_USER }}/simpleboard/
 
       - name: Deploy to Prod
-        if: env.ENVIRONMENT == 'prod'
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_IP }}
