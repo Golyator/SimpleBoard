@@ -1,0 +1,27 @@
+# .github/workflows/test-ssh.yml
+name: Test SSH Connection to VPS
+
+on: workflow_dispatch # Manuell auslösbar (für Tests)
+
+env:
+  VPS_IP: ${{ secrets.VPS_IP }}
+  VPS_USER: ${{ secrets.VPS_USER }}
+  VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+
+jobs:
+  test-ssh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test SSH Connection
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.VPS_IP }}
+          username: ${{ env.VPS_USER }}
+          key: ${{ env.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            echo "SSH connection successful!"
+            echo "Hostname: $(hostname)"
+            echo "User: $(whoami)"
+            echo "Current directory: $(pwd)"
+            ls -la
