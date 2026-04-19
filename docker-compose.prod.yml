@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   backend:
-    image: ${DOCKER_HUB_USERNAME}/simpleboard:latest
+    image: golyat/simpleboard:latest
     ports:
       - "4000:4000"
     environment:
